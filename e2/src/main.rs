@@ -34,7 +34,7 @@ impl Scorer for MoveScorer {
             ("C", "X") => ROCK_PTS + WIN_PTS,
             ("C", "Y") => PAPER_PTS + LOSE_PTS,
             ("C", "Z") => SCISSORS_PTS + DRAW_PTS,
-            _ => 0
+            _ => 0,
         }
     }
 }
@@ -58,7 +58,7 @@ impl Scorer for OutcomeScorer {
             ("C", "X") => PAPER_PTS + LOSE_PTS,
             ("C", "Y") => SCISSORS_PTS + DRAW_PTS,
             ("C", "Z") => ROCK_PTS + WIN_PTS,
-            _ => 0
+            _ => 0,
         }
     }
 }
@@ -77,8 +77,11 @@ fn get_tournament_score(input: &str, scorer: &dyn Scorer) -> u32 {
 fn main() {
     let input = fs::read_to_string("input.txt").expect("Needs an input file.");
 
-    println!("As move: {}", get_tournament_score(&input, &MoveScorer{}));
-    println!("As outcome: {}", get_tournament_score(&input, &OutcomeScorer{}));
+    println!("As move: {}", get_tournament_score(&input, &MoveScorer {}));
+    println!(
+        "As outcome: {}",
+        get_tournament_score(&input, &OutcomeScorer {})
+    );
 }
 
 #[cfg(test)]
@@ -90,13 +93,13 @@ mod tests {
     fn tst_find_tournament_score_for_letter_as_move() {
         let input = fs::read_to_string("tst_input.txt").expect("Needs an input file.");
 
-        assert_eq!(get_tournament_score(&input, &MoveScorer{}), 15);
+        assert_eq!(get_tournament_score(&input, &MoveScorer {}), 15);
     }
 
     #[test]
     fn tst_find_tournament_score_for_letter_as_outcome() {
         let input = fs::read_to_string("tst_input.txt").expect("Needs an input file.");
 
-        assert_eq!(get_tournament_score(&input, &OutcomeScorer{}), 12);
+        assert_eq!(get_tournament_score(&input, &OutcomeScorer {}), 12);
     }
 }
